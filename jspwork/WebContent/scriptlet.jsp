@@ -1,5 +1,7 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
@@ -9,9 +11,11 @@
 </head>
 <body>
 <%!
- Date d1 = new Date();
-%>
 
-<% out.println(d1); %>
+SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+Date now = new Date();
+	
+%>
+<% out.println(sDate.format(now)); %>
 </body>
 </html>
