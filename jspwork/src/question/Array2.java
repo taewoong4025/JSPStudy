@@ -1,8 +1,6 @@
 package question;
 
-//import java.util.Arrays;
-
-public class Array {
+public class Array2 {
 	private int num1;
 	private int num2;
 	private int num3;
@@ -40,32 +38,14 @@ public class Array {
 		this.num5 = num5;
 	}
 	
-	/*
-	 * public int process(int num1, int num2, int num3, int num4, int num5) { int
-	 * arr[] = {num1,num2,num3,num4,num5};
-	 * 
-	 * Arrays.sort(arr); int max = arr[4];
-	 * 
-	 * return max; }
-	 */
-	
-	public int process(int[] array) {
-		int max=0;
+	public String process(int[] array) {
+		StringBuffer stringBuffer = new StringBuffer();
 		
 		for (int i = 0; i < array.length; i++) {
-			if(max<array[i]) {
-				max=array[i];
+			if(array[i]%3==0) {
+				stringBuffer.append(array[i]+" ");
 			}
 		}
-		return max;
+		return stringBuffer.toString();
 	}
 }
-
-
-
-
-
-
-
-
-
