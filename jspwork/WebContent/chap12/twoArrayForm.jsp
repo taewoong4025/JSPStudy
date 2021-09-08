@@ -3,6 +3,7 @@
     
     <jsp:useBean id="twoArrayBean" class="question.TwoArray"></jsp:useBean>
    <jsp:setProperty property="num" name="twoArrayBean"/>
+  
 <!DOCTYPE html>
 <html>
 <head>
