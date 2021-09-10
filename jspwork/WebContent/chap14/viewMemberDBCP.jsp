@@ -1,18 +1,26 @@
-<%@page import="java.sql.*"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="javax.naming.Context"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 	
-	<!-- MSsql,Mysql은  자동 commit! -->
+	<!-- Oralce 에서는 commit 필수! -->
 	
-<%!Connection conn = null;
-	Statement stmt = null;
-	ResultSet rs = null;
-
-	String url = "jdbc:mysql://localhost:3306/jspdb";
-	String user = "root";
-	String pwd = "1234";
-	String sql = "select * from member2";%>
+	<%!
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		DataSource ds = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sql = "select * from member2";
+	%>
+	
 <html>
 <head>
 <meta charset="EUC-KR">
@@ -28,15 +36,16 @@
 		</tr>
 		<%
 			try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(url, user, pwd);
+			conn = ((DataSource) (new InitialContext().lookup("java:comp/env/jdbcoracle"))).getConnection();
+			System.out.println("DBCP 연동 성공");
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
 		%>
 		<tr>
-			<td><%=rs.getString("id")%></td>
+			<td>
+			<a href="updateMember.jsp?id=<%=rs.getString("id")%>"><%=rs.getString("id")%></a></td>
 			<td><%=rs.getString("name")%></td>
 			<td>
 				<%
@@ -66,5 +75,7 @@
 		}
 		%>
 	</table>
+	
+	<a href="addFormDBCP.html">추가하기</a>
 </body>
 </html>

@@ -17,9 +17,9 @@
 		try{
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			String user = "scott";
-			String password = "tiger";
+			String pwd = "tiger";
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			DriverManager.getConnection(url, user, password);
+			DriverManager.getConnection(url, user, pwd);
 			out.print("데이터베이스 연결이 성공했습니다.");			
 		}
 		catch(SQLException ex){

@@ -1,17 +1,21 @@
-<%@page import="java.sql.*"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 	
-	<!-- MSsql,Mysql은  자동 commit! -->
+	<!-- Oralce 에서는 commit 필수! -->
 	
 <%!Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
 
-	String url = "jdbc:mysql://localhost:3306/jspdb";
-	String user = "root";
-	String pwd = "1234";
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	String user = "scott";
+	String pwd = "tiger";
 	String sql = "select * from member2";%>
 <html>
 <head>
@@ -28,7 +32,7 @@
 		</tr>
 		<%
 			try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(url, user, pwd);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -36,7 +40,8 @@
 			while (rs.next()) {
 		%>
 		<tr>
-			<td><%=rs.getString("id")%></td>
+			<td>
+			<a href="updateMember.jsp?id=<%=rs.getString("id")%>"><%=rs.getString("id")%></a></td>
 			<td><%=rs.getString("name")%></td>
 			<td>
 				<%
