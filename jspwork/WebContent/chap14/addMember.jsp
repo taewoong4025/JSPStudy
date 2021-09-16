@@ -31,7 +31,6 @@
 	p3 = request.getParameter("phone3");
 	
 	try {
-
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		conn = DriverManager.getConnection(url, user, pwd);
 		stmt = conn.createStatement();
